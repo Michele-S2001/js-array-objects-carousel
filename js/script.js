@@ -31,12 +31,7 @@ const carouselDomElement = document.getElementById('carousel');
 
 // devo recuperare tutti i dettagli dagli oggetti e scinderli
 images.forEach((image) => {
-  
-  const imgPath = image.path;
-  const imgTitle = image.title;
-  const imgDescription = image.text;
-
-  imgElement(imgPath, imgTitle, imgDescription);
+  addImgElementToDOM(image, carouselDomElement);
 })
 
 //elementi dal DOM
@@ -92,20 +87,19 @@ arrowLeftDomElement.addEventListener("click", function() {
   thumbnailsDomElements[imgIndex].classList.add('active');
 })
 
-
 // funzione che crea l'elemento HTML e inserisce nel carosello
-function imgElement (path, title, desc) {
+function addImgElementToDOM (image, carouselElement) {
   const html = `
     <div class="carousel-img">
-      <img src="${path}">
+      <img src="${image.path}">
     <div class="overlay">
-      <div class="overlay__title">${title}</div>
+      <div class="overlay__title">${image.title}</div>
       <div class="overlay__description">
-        ${desc}
+        ${image.text}
       </div>
     </div>
   </div>
   `;
 
-  carouselDomElement.innerHTML += html;
+  carouselElement.innerHTML += html;
 }
