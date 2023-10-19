@@ -126,6 +126,16 @@ body {
   filter: brightness(100%);
 }
 
+/* buttons CTA */
+.buttons {
+  text-align: center;
+  font-size: 32px;
+}
+
+.buttons .container > * {
+  cursor: pointer;
+}
+
 /* MEDIA */
 @media screen and (max-width: 1024px) {
   .carousel-thumbnails {

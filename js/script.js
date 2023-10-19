@@ -40,6 +40,9 @@ const arrowRightDomElement = carouselDomElement.querySelector('.arrow-right');
 
 const thumbnailsDomElements = document.querySelectorAll('.thumbnail');
 
+const playBtnDomElement = document.getElementById('play');
+const stopBtnDomElement = document.getElementById('pause');
+
 //creo un indice per selezionare le immagini 
 let imgIndex = 0;
 let imgMaxIndex = images.length - 1;
@@ -50,18 +53,27 @@ const carouselImages = document.querySelectorAll('.carousel-img');
 carouselImages[imgIndex].classList.add('show');
 thumbnailsDomElements[imgIndex].classList.add('active');
 
+
+let startSliding;
 // gestisco gli eventListeners sulle arrow
-setInterval(() => {
-  carouselImages[imgIndex].classList.remove('show');
-  thumbnailsDomElements[imgIndex].classList.remove('active');
-  if (imgIndex === imgMaxIndex) {
-    imgIndex = 0;
-  } else {
-    ++imgIndex;
-  }
-  carouselImages[imgIndex].classList.add('show');
-  thumbnailsDomElements[imgIndex].classList.add('active');
-}, 3000);
+playBtnDomElement.addEventListener('click', () => {
+  startSliding = setInterval(() => {
+    carouselImages[imgIndex].classList.remove('show');
+    thumbnailsDomElements[imgIndex].classList.remove('active');
+    if (imgIndex === imgMaxIndex) {
+      imgIndex = 0;
+    } else {
+      ++imgIndex;
+    }
+    carouselImages[imgIndex].classList.add('show');
+    thumbnailsDomElements[imgIndex].classList.add('active');
+  }, 3000);
+})
+
+stopBtnDomElement.addEventListener('click', () => {
+  clearInterval(startSliding);
+})
+
 
 arrowRightDomElement.addEventListener("click", function() {
   carouselImages[imgIndex].classList.remove('show');
