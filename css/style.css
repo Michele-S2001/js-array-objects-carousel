@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+
 /* RESET RULES */
 img {
   display: block;
@@ -69,4 +76,31 @@ body {
 
 .arrow.arrow-right {
   right: 10px;
+}
+
+/* grid */
+.carousel-img {
+  display: grid;
+  color: white;
+  position: relative;
+  height: 100%;
+}
+
+.overlay {
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+  padding: 20px;
+  text-align: end;
+}
+
+.overlay .overlay__title {
+  font-size: 33px;
+  font-weight: bold;
+}
+
+.overlay .overlay__description {
+  font-weight: 500;
 }
