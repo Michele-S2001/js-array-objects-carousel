@@ -107,3 +107,28 @@ body {
 .overlay .overlay__description {
   font-weight: 500;
 }
+
+/* CAROUSEL THUMBNAIL */
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.thumbnails > .thumbnail {
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(10%);
+}
+
+.thumbnail.active {
+  border: 5px solid #006098;
+  filter: brightness(100%);
+}
+
+/* MEDIA */
+@media screen and (max-width: 1024px) {
+  .carousel-thumbnails {
+    display: none;
+  }
+}

@@ -43,6 +43,7 @@ images.forEach((image) => {
 const arrowLeftDomElement = carouselDomElement.querySelector('.arrow-left');
 const arrowRightDomElement = carouselDomElement.querySelector('.arrow-right');
 
+const thumbnailsDomElements = document.querySelectorAll('.thumbnail');
 
 //creo un indice per selezionare le immagini 
 let imgIndex = 0;
@@ -52,28 +53,44 @@ let imgMaxIndex = images.length - 1;
 const carouselImages = document.querySelectorAll('.carousel-img');
 
 carouselImages[imgIndex].classList.add('show');
+thumbnailsDomElements[imgIndex].classList.add('active');
 
 // gestisco gli eventListeners sulle arrow
-arrowRightDomElement.addEventListener("click", function() {
+setInterval(() => {
   carouselImages[imgIndex].classList.remove('show');
+  thumbnailsDomElements[imgIndex].classList.remove('active');
   if (imgIndex === imgMaxIndex) {
     imgIndex = 0;
   } else {
     ++imgIndex;
   }
   carouselImages[imgIndex].classList.add('show');
+  thumbnailsDomElements[imgIndex].classList.add('active');
+}, 3000);
+
+arrowRightDomElement.addEventListener("click", function() {
+  carouselImages[imgIndex].classList.remove('show');
+  thumbnailsDomElements[imgIndex].classList.remove('active');
+  if (imgIndex === imgMaxIndex) {
+    imgIndex = 0;
+  } else {
+    ++imgIndex;
+  }
+  carouselImages[imgIndex].classList.add('show');
+  thumbnailsDomElements[imgIndex].classList.add('active');
 });
 
 arrowLeftDomElement.addEventListener("click", function() {
   carouselImages[imgIndex].classList.remove('show');
+  thumbnailsDomElements[imgIndex].classList.remove('active');
   if (imgIndex === 0) {
     imgIndex = imgMaxIndex;
   } else {
     --imgIndex;
   }
   carouselImages[imgIndex].classList.add('show');
+  thumbnailsDomElements[imgIndex].classList.add('active');
 })
-
 
 
 // funzione che crea l'elemento HTML e inserisce nel carosello
