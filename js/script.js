@@ -3,34 +3,31 @@ const images = [
 	{
 		path: './img/01.webp',
 		title: "Marvel's Spiderman Miles Morale",
-		text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
+		text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.'
 	},
 	{
 		path: './img/02.webp',
 		title: 'Ratchet & Clank: Rift Apart',
-		text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.',
+		text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.'
 	},
 	{
 		path: './img/03.webp',
 		title: 'Fortnite',
-		text: 'Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.',
+		text: 'Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.'
 	},
 	{
 		path: './img/04.webp',
 		title: 'Stray',
-		text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city',
+		text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city'
 	},
 	{
 		path: './img/05.webp',
 		title: "Marvel's Avengers",
-		text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.",
+		text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay."
 	},
 ];
 
-//elementi dal DOM
 const carouselDomElement = document.getElementById('carousel');
-const arrowLeftDomElement = carouselDomElement.querySelector('.arrow-left');
-const arrowRightDomElement = carouselDomElement.querySelector('.arrow-right');
 
 // devo recuperare tutti i dettagli dagli oggetti e scinderli
 images.forEach((image) => {
@@ -41,6 +38,11 @@ images.forEach((image) => {
 
   imgElement(imgPath, imgTitle, imgDescription);
 })
+
+//elementi dal DOM
+const arrowLeftDomElement = carouselDomElement.querySelector('.arrow-left');
+const arrowRightDomElement = carouselDomElement.querySelector('.arrow-right');
+
 
 //creo un indice per selezionare le immagini 
 let imgIndex = 0;
@@ -53,20 +55,26 @@ carouselImages[imgIndex].classList.add('show');
 
 // gestisco gli eventListeners sulle arrow
 arrowRightDomElement.addEventListener("click", function() {
-  console.log('click');
+  carouselImages[imgIndex].classList.remove('show');
+  if (imgIndex === imgMaxIndex) {
+    imgIndex = 0;
+  } else {
+    ++imgIndex;
+  }
+  carouselImages[imgIndex].classList.add('show');
 });
 
 arrowLeftDomElement.addEventListener("click", function() {
-  console.log('click');
+  carouselImages[imgIndex].classList.remove('show');
+  if (imgIndex === 0) {
+    imgIndex = imgMaxIndex;
+  } else {
+    --imgIndex;
+  }
+  carouselImages[imgIndex].classList.add('show');
 })
 
-// carouselImages[imgIndex].classList.remove('show');
-// if (imgIndex === imgMaxIndex) {
-//   imgIndex = 0;
-// } else {
-//   ++imgIndex;
-// }
-// carouselImages[imgIndex].classList.add('show');
+
 
 // funzione che crea l'elemento HTML e inserisce nel carosello
 function imgElement (path, title, desc) {
