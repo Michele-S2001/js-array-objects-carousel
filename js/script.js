@@ -114,10 +114,15 @@ thumbnailsDomElements[imgIndex].classList.add('active');
 let startSliding;
 // gestisco gli eventListeners sulle arrow
 playBtnDomElement.addEventListener('click', () => {
-  startSliding = setInterval(nextSlide, 3000);
+  if(startSliding === undefined) {
+    startSliding = setInterval(nextSlide, 3000);
+  }
 })
 
-stopBtnDomElement.addEventListener('click', () => clearInterval(startSliding));
+stopBtnDomElement.addEventListener('click', () => {
+  clearInterval(startSliding);
+  startSliding = undefined; 
+});
   
 arrowRightDomElement.addEventListener("click", nextSlide);
 arrowLeftDomElement.addEventListener("click", prevSlide);
