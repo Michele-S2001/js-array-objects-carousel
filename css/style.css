@@ -134,6 +134,11 @@ body {
 
 .buttons .container > * {
   cursor: pointer;
+  padding: 0 10px;
+}
+
+.buttons .container > *:active {
+  color: white;
 }
 
 /* MEDIA */
