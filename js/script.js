@@ -93,6 +93,17 @@ const stopBtnDomElement = document.getElementById('pause');
 let imgIndex = 0;
 let imgMaxIndex = images.length - 1;
 
+// creo l'effetto click sulle thumbnail
+thumbnailsDomElements.forEach((thumb, i) => {
+  thumb.addEventListener('click', function () {
+    carouselImages[imgIndex].classList.remove('show');
+    thumbnailsDomElements[imgIndex].classList.remove('active');
+    imgIndex = i;
+    thumbnailsDomElements[imgIndex].classList.add('active');
+    carouselImages[imgIndex].classList.add('show');
+  })
+})
+
 //recupero gli elementi generati dal DOM
 const carouselImages = document.querySelectorAll('.carousel-img');
 
