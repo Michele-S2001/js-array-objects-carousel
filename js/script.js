@@ -1,4 +1,50 @@
-// array con le immagini e i dettagli
+//------------------------------------------------ GRUPPO FUNZIONI ------------------------
+
+// funzione per creare la struttura html da inserire nell'html
+function addImgElementToDOM (image, carouselElement) {
+  const html = `
+    <div class="carousel-img">
+      <img src="${image.path}">
+    <div class="overlay">
+      <div class="overlay__title">${image.title}</div>
+      <div class="overlay__description">
+        ${image.text}
+      </div>
+    </div>
+  </div>
+  `;
+
+  carouselElement.innerHTML += html;
+}
+
+// funzione per andare avanti con le slide del carosello
+function nextSlide() {
+  carouselImages[imgIndex].classList.remove('show');
+  thumbnailsDomElements[imgIndex].classList.remove('active');
+  if (imgIndex === imgMaxIndex) {
+    imgIndex = 0;
+  } else {
+    ++imgIndex;
+  }
+  carouselImages[imgIndex].classList.add('show');
+  thumbnailsDomElements[imgIndex].classList.add('active');
+}
+
+// funzione per andare indietro con le slide del carosello
+function prevSlide() {
+  carouselImages[imgIndex].classList.remove('show');
+  thumbnailsDomElements[imgIndex].classList.remove('active');
+  if (imgIndex === 0) {
+    imgIndex = imgMaxIndex;
+  } else {
+    --imgIndex;
+  }
+  carouselImages[imgIndex].classList.add('show');
+  thumbnailsDomElements[imgIndex].classList.add('active');
+}
+
+
+//------------------------------------------------ ARRAY DI OGGETTI IMMAGINE ----------------------
 const images = [
 	{
 		path: './img/01.webp',
@@ -27,12 +73,12 @@ const images = [
 	},
 ];
 
+//------------------------------------------- LOGICA ------------------------------------------------
+
 const carouselDomElement = document.getElementById('carousel');
 
 // devo recuperare tutti i dettagli dagli oggetti e scinderli
-images.forEach((image) => {
-  addImgElementToDOM(image, carouselDomElement);
-})
+images.forEach((image) => addImgElementToDOM(image, carouselDomElement));
 
 //elementi dal DOM
 const arrowLeftDomElement = carouselDomElement.querySelector('.arrow-left');
@@ -57,61 +103,10 @@ thumbnailsDomElements[imgIndex].classList.add('active');
 let startSliding;
 // gestisco gli eventListeners sulle arrow
 playBtnDomElement.addEventListener('click', () => {
-  startSliding = setInterval(() => {
-    carouselImages[imgIndex].classList.remove('show');
-    thumbnailsDomElements[imgIndex].classList.remove('active');
-    if (imgIndex === imgMaxIndex) {
-      imgIndex = 0;
-    } else {
-      ++imgIndex;
-    }
-    carouselImages[imgIndex].classList.add('show');
-    thumbnailsDomElements[imgIndex].classList.add('active');
-  }, 3000);
+  startSliding = setInterval(nextSlide, 3000);
 })
 
-stopBtnDomElement.addEventListener('click', () => {
-  clearInterval(startSliding);
-})
-
-
-arrowRightDomElement.addEventListener("click", function() {
-  carouselImages[imgIndex].classList.remove('show');
-  thumbnailsDomElements[imgIndex].classList.remove('active');
-  if (imgIndex === imgMaxIndex) {
-    imgIndex = 0;
-  } else {
-    ++imgIndex;
-  }
-  carouselImages[imgIndex].classList.add('show');
-  thumbnailsDomElements[imgIndex].classList.add('active');
-});
-
-arrowLeftDomElement.addEventListener("click", function() {
-  carouselImages[imgIndex].classList.remove('show');
-  thumbnailsDomElements[imgIndex].classList.remove('active');
-  if (imgIndex === 0) {
-    imgIndex = imgMaxIndex;
-  } else {
-    --imgIndex;
-  }
-  carouselImages[imgIndex].classList.add('show');
-  thumbnailsDomElements[imgIndex].classList.add('active');
-})
-
-// funzione che crea l'elemento HTML e inserisce nel carosello
-function addImgElementToDOM (image, carouselElement) {
-  const html = `
-    <div class="carousel-img">
-      <img src="${image.path}">
-    <div class="overlay">
-      <div class="overlay__title">${image.title}</div>
-      <div class="overlay__description">
-        ${image.text}
-      </div>
-    </div>
-  </div>
-  `;
-
-  carouselElement.innerHTML += html;
-}
+stopBtnDomElement.addEventListener('click', () => clearInterval(startSliding));
+  
+arrowRightDomElement.addEventListener("click", nextSlide);
+arrowLeftDomElement.addEventListener("click", prevSlide);
